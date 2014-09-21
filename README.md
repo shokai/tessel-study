@@ -10,8 +10,11 @@
     % tessel blink
     % tessel wifi -n [WiFi AP NAME] -p [PASSWORD] -s wpa2
 
+## REPL
 
-## LED
+    % tessel repl
+
+## blink LED
 
     % tessel run blink_led.js
 
