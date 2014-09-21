@@ -8,6 +8,7 @@
     % npm tessel -g
     % tessel update
     % tessel blink
+    % tessel wifi -n [WiFi AP NAME] -p [PASSWORD] -s wpa2
 
 
 ## LED
