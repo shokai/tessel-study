@@ -1,5 +1,5 @@
 {
-  "name": "tessel study",
+  "name": "tessel-study",
   "version": "0.0.0",
   "description": "tessel study",
   "main": "blink_led.js",
