@@ -1,0 +1,14 @@
+{
+  "name": "tessel study",
+  "version": "0.0.0",
+  "description": "tessel study",
+  "main": "blink_led.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sho Hashimoto <hashimoto@shokai.org>",
+  "license": "MIT",
+  "dependencies": {
+    "camera-vc0706": "^0.1.6"
+  }
+}
