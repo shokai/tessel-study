@@ -2,21 +2,15 @@
 // 15秒間隔で撮影する
 
 var tessel = require('tessel');
-var http = require('http');
+var wifi   = require('wifi-cc3000');
+var router = require('tiny-router');
 var camera = require('camera-vc0706').use(tessel.port['A']);
-var image = null;
+image = null;
 
-http.createServer(function(req, res){
-  if(!image){
-    res.writeHead(500);
-    res.end('no capture image');
-    return;
-  }
-  res.writeHead(200, {'Content-Type': 'image/jpeg'});
-  res.end(image);
-}).listen(80);
-console.log('server start - PORT: 80');
-
+var led_green = tessel.led[0].output(1);
+setInterval(function(){
+  if(wifi.isConnected()) led_green.toggle()
+}, 500);
 
 // 解像度設定
 camera.on('ready', function() {
@@ -49,3 +43,29 @@ camera.startCapture = function(callback, interval){
     }, interval);
   });
 };
+
+camera.on('ready:capture', function(){
+  wifi.reset();
+});
+
+wifi.on('connect', function(){
+  console.log('wifi connect');
+  var port = (process.env.PORT || 80) - 0;
+  router.listen(port);
+  console.log('start HTTP server at PORT: '+port);
+});
+
+router.get('/', function(req, res){
+  console.log(req.method + ': ' + req.url);
+  res.send('camera-server.js');
+});
+
+router.get('/camera.jpg', function(req, res){
+  console.log(req.method + ': ' + req.url);
+  if(!image){
+    res.writeHead(500);
+    res.end('no capture image');
+    return;
+  }
+  res.sendImage(image);
+});
