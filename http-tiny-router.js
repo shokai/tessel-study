@@ -1,4 +1,13 @@
+var tessel = require('tessel');
+var wifi   = require('wifi-cc3000');
 var router = require('tiny-router');
+
+var led_green = tessel.led[0].output(1);
+setInterval(function(){
+  if(wifi.isConnected()){
+    led_green.toggle()
+  }
+}, 500);
 
 router.get('/', function(req, res){
   console.log(req.method + ': ' + req.url);
@@ -16,6 +25,10 @@ router.get('/hello/{arg}', function(req, res){
   res.send('hello ' + req.body.arg);
 });
 
-var port = (process.env.PORT || 80) - 0;
-router.listen(port);
-console.log('start server at PORT: '+port);
+wifi.on('connect', function(){
+  console.log('wifi connect!!');
+  var port = (process.env.PORT || 80) - 0;
+  router.listen(port);
+  console.log('start HTTP server at PORT: '+port);
+});
+wifi.reset();

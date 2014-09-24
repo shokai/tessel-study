@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "camera-vc0706": "^0.1.6",
-    "tiny-router": "^0.1.3"
+    "tiny-router": "^0.1.3",
+    "wifi-cc3000": "0.0.0"
   }
 }
