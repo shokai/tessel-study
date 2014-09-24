@@ -3,9 +3,14 @@
 - http://start.tessel.io
 - https://tessel.io/docs
 
-## setup
+## Install Dependencies
 
-    % npm tessel -g
+    % brew install node
+    % npm install
+    % npm install tessel -g
+
+## Setup
+
     % tessel update
     % tessel blink
     % tessel wifi -n [WiFi AP NAME] -p [PASSWORD] -s wpa2
