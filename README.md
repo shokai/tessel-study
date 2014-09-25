@@ -1,5 +1,10 @@
 # tessel study
 
+- https://github.com/shokai/tessel-study
+
+
+## Documents
+
 - http://start.tessel.io
 - https://tessel.io/docs
 
