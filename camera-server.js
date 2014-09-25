@@ -5,7 +5,7 @@ var tessel = require('tessel');
 var wifi   = require('wifi-cc3000');
 var router = require('tiny-router');
 var camera = require('camera-vc0706').use(tessel.port['A']);
-image = null;
+var image = null;
 
 var led_green = tessel.led[0].output(1);
 setInterval(function(){
@@ -44,10 +44,12 @@ camera.startCapture = function(callback, interval){
   });
 };
 
+// カメラの準備ができてからwifiを再起動
 camera.on('ready:capture', function(){
   wifi.reset();
 });
 
+// wifiが接続してからhttpサーバー起動
 wifi.on('connect', function(){
   console.log('wifi connect');
   var port = (process.env.PORT || 80) - 0;
