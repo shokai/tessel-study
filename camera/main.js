@@ -1,10 +1,17 @@
 var tessel = require('tessel');
 var camera = require('camera-vc0706').use(tessel.port['A']);
 
-var notificationLED = tessel.led[3];
+var led_green = tessel.led[0];
 
 camera.on('ready', function() {
-  notificationLED.high();
+  camera.setResolution('vga', function(err, res){
+    if(err) throw 'setting camera resolution failed!';
+    camera.emit('ready:capture');
+  });
+});
+
+camera.on('ready:capture', function(){
+  led_green.high();
 
   camera.takePicture(function(err, image) {
     if(err){
@@ -12,7 +19,7 @@ camera.on('ready', function() {
       return;
     }
 
-    notificationLED.low();
+    led_green.low();
     var name = 'picture-' + Math.floor(Date.now()*1000) + '.jpg';
     console.log('Picture saving as', name, '...');
     process.sendfile(name, image);
