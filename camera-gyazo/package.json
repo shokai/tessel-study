@@ -1,0 +1,18 @@
+{
+  "name": "camera-gyazo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "camera-vc0706": "^0.1.6",
+    "gyazo-api": "git://github.com/shokai/node-gyazo-api.git#develop",
+    "request": "^2.44.0",
+    "wifi-cc3000": "0.0.0",
+    "yo-api": "^1.0.0"
+  }
+}
