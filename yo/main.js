@@ -2,8 +2,8 @@ var tessel = require('tessel');
 var wifi   = require('wifi-cc3000');
 var Yo     = require('yo-api');
 
-var yo_api_key = process.argv[2];
-var yo = new Yo(yo_api_key);
+var yo_token = process.argv[2];
+var yo = new Yo(yo_token);
 
 var led_green = tessel.led[0].output(1);
 setInterval(function(){
