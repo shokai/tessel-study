@@ -1,0 +1,15 @@
+{
+  "name": "audio-play-mp3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tessel run main.js",
+    "start": "tessel push main.js --logs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "audio-vs1053b": "^0.1.9"
+  }
+}
