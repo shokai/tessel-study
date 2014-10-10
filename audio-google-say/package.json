@@ -1,0 +1,17 @@
+{
+  "name": "audio-google-say",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tessel run main.js",
+    "start": "tessel push main.js --logs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "audio-vs1053b": "^0.1.9",
+    "request": "^2.45.0",
+    "wifi-cc3000": "0.0.0"
+  }
+}
