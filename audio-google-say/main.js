@@ -24,6 +24,10 @@ var getAudioStream = function(speech_text){
 
 var say = function(speech_text){
   console.log('say:'+speech_text);
+  if(!wifi.isConnected()){
+    console.error('wifi is not connected');
+    return;
+  }
   getAudioStream(speech_text).pipe(audio.createPlayStream());
 };
 
@@ -37,11 +41,6 @@ audio.on('ready', function(){
 
 audio.on('ready:volume', function(){
   console.log('audio ready:volume');
-  wifi.reset();
-});
-
-wifi.on('connect', function(){
-  console.log('wifi connect');
   if(err) return console.error(err);
   setInterval(function(){
     say('うどん居酒屋 かずどん。');
