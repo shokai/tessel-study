@@ -9,7 +9,7 @@ setInterval(function(){
   led_green.toggle()
 }, 200);
 
-var getAudioStream = module.exports = function(speech_text){
+var getAudioStream = function(speech_text){
   return request.get({
     uri: 'http://translate.google.com/translate_tts',
     qs: {
@@ -44,7 +44,7 @@ wifi.on('connect', function(){
   console.log('wifi connect');
   if(err) return console.error(err);
   setInterval(function(){
-    say('ざんまい');
+    say('うどん居酒屋 かずどん。');
   }, 30*1000);
-  say('かずどん');
+  say('やきにくざんまい。');
 });
