@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "audio-vs1053b": "^0.1.9",
-    "request": "^2.45.0"
+    "request": "^2.45.0",
+    "wifi-cc3000": "0.0.0"
   }
 }
