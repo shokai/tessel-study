@@ -1,5 +1,6 @@
 var tessel = require('tessel');
 var fs = require('fs');
+var stream = require('stream');
 var request = require('request');
 var wifi   = require('wifi-cc3000');
 var audio = require('audio-vs1053b').use(tessel.port['A']);
@@ -28,7 +29,19 @@ var say = function(speech_text){
     console.error('wifi is not connected');
     return;
   }
-  getAudioStream(speech_text).pipe(audio.createPlayStream());
+  var data = [];
+  var ws = stream.Writable({decodeStrings: false});
+  ws._write = function(chunk, enc, next){
+    data.push(chunk);
+    next();
+  };
+  var req = getAudioStream(speech_text);
+  req.pipe(ws);
+  req.on('end', function(){
+    var buf = new Buffer(10240);
+    buf.write(data.join(''));
+    audio.play(buf);
+  });
 };
 
 audio.on('ready', function(){
@@ -43,7 +56,7 @@ audio.on('ready:volume', function(){
   console.log('audio ready:volume');
   if(err) return console.error(err);
   setInterval(function(){
-    say('うどん居酒屋 かずどん。');
+    say('うどん居酒屋 かずどん');
   }, 30*1000);
-  say('やきにくざんまい。');
+  say('焼肉ざんまい');
 });
