@@ -9,11 +9,11 @@ setInterval(function(){
   led_green.toggle()
 }, 200);
 
-var getAudioStream = module.exports = function(speech){
+var getAudioStream = module.exports = function(speech_text){
   return request.get({
     uri: 'http://translate.google.com/translate_tts',
     qs: {
-      q: speech,
+      q: speech_text,
       tl: 'ja'
     },
     headers: {
@@ -22,22 +22,29 @@ var getAudioStream = module.exports = function(speech){
   });
 };
 
-var say = function(speech){
-  getAudioStream(speech).pipe(audio.createPlayStream());
+var say = function(speech_text){
+  console.log('say:'+speech_text);
+  getAudioStream(speech_text).pipe(audio.createPlayStream());
 };
 
 audio.on('ready', function(){
   console.log('audio ready');
+  audio.setVolume(20, function(err){
+    if(err) return console.error(err);
+    audio.emit('ready:volume');
+  });
+});
+
+audio.on('ready:volume', function(){
+  console.log('audio ready:volume');
   wifi.reset();
 });
 
 wifi.on('connect', function(){
   console.log('wifi connect');
-  audio.setVolume(20, function(err){
-    if(err) return console.error(err);
-    setInterval(function(){
-      say('よお');
-    }, 1000*30);
-    say('よお');
-  });
+  if(err) return console.error(err);
+  setInterval(function(){
+    say('ざんまい');
+  }, 30*1000);
+  say('かずどん');
 });
