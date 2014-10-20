@@ -1,5 +1,4 @@
 var tessel = require('tessel');
-var fs = require('fs');
 var stream = require('stream');
 var request = require('request');
 var wifi   = require('wifi-cc3000');
